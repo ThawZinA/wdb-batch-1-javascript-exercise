@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>ToDo List</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <style>
+        label {
+            font-size: 30px;
+        }
+
+        .delete {
+            float: right;
+            color: red;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center mt-5">
+            <div class="col-8"  id="app">
+                <h1 class="text-center mb-4">ToDo List</h1>
+                <div class="form-group">
+                    <label>Task</label>
+                    <input type="text" class="form-control form-control-lg" v-model='task' placeholder="enter your task here">
+                </div>
+
+                <button class="btn btn-primary" @click='addTask'>Add Task</button>
+
+                <hr>
+
+                <div>
+                    <ul class="list-group">
+                        <li class="list-group-item" v-for= "todo in todos">{{ todo }}<span class="delete" @click="removeTask">X</span></li>
+                    </ul>
+                </div>
+
+                <button class="btn btn-danger btn-block mt-3" @click='deleteAll'>Delete All Task</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script>
+        var app = new Vue ({
+            el: '#app',
+            
+            data: {
+                todos: ['Task One', 'Task Two', 'Task Three'],
+                task: ''
+            },
+
+            methods: {
+                addTask: function() {
+                    if(this.task === '') {
+                        alert("Please Enter the Task.")
+                    } else {
+                        this.todos.push(this.task)
+                        this.task = ''
+                    }
+                },
+
+                removeTask: function(e) {
+                   e.target.parentNode.remove();
+                },
+
+                deleteAll: function() {
+                    alert("Are you sure you want to delete all task.")
+                    this.todos = []
+                }
+            }
+        })
+    </script>
+</body>
+</html>
