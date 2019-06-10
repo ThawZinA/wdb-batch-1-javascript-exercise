@@ -35,7 +35,7 @@
 
                 <div>
                     <ul class="list-group">
-                        <li class="list-group-item" v-for= "todo in todos">{{ todo }}<span class="delete" @click="removeTask">X</span></li>
+                        <li class="list-group-item" v-for= "todo in todos">{{ todo }}<span class="delete" @click="removeTask(todo)">X</span></li>
                     </ul>
                 </div>
 
@@ -65,8 +65,10 @@
                     }
                 },
 
-                removeTask: function(e) {
-                   e.target.parentNode.remove();
+                removeTask: function(todo) {
+                    var array = this.todos
+                    var index = array.indexOf(todo)
+                    array.splice(index, 1) 
                 },
 
                 deleteAll: function() {
